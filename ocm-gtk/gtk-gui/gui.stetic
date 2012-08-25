@@ -17765,26 +17765,6 @@ Cache Name</property>
       <widget class="Gtk.VBox" id="mapVBox">
         <property name="MemberName" />
         <property name="Spacing">6</property>
-        <child>
-          <widget class="Gtk.ScrolledWindow" id="mapScroll">
-            <property name="MemberName" />
-            <property name="CanFocus">True</property>
-            <property name="ShadowType">In</property>
-            <child>
-              <widget class="Gtk.Viewport" id="GtkViewport">
-                <property name="MemberName" />
-                <property name="ShadowType">None</property>
-                <child>
-                  <placeholder />
-                </child>
-              </widget>
-            </child>
-          </widget>
-          <packing>
-            <property name="Position">0</property>
-            <property name="AutoSize">True</property>
-          </packing>
-        </child>
       </widget>
     </child>
   </widget>
