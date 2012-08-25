@@ -1993,7 +1993,6 @@ FILES = \
 	Application/Widgets/CacheInfoWidget.cs \
 	gtk-gui/ocmgtk.CacheInfoWidget.cs \
 	Application/Widgets/MapWidget.cs \
-	gtk-gui/ocmgtk.MapWidget.cs \
 	Application/Widgets/GeocacheInfoPanel.cs \
 	Application/Widgets/ImagesWidget.cs \
 	Application/Widgets/NotesWidget.cs \

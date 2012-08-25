@@ -17758,10 +17758,6 @@ Cache Name</property>
       </widget>
     </child>
   </widget>
-  <widget class="Gtk.Socket" id="ocmgtk.MapWidget" design-size="330 323">
-    <property name="MemberName" />
-    <property name="Visible">False</property>
-  </widget>
   <widget class="Gtk.Bin" id="ocmgtk.GeocacheInfoPanel" design-size="826 424">
     <property name="MemberName" />
     <property name="Visible">False</property>

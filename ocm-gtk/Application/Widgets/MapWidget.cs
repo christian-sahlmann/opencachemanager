@@ -90,7 +90,6 @@ namespace ocmgtk
 		
 		public MapWidget ()
 		{
-			this.Build ();
 			m_UnfilteredCaches = new Dictionary<string, Geocache>();
 			m_ChildWaypoints = new List<Waypoint>();
 		}
