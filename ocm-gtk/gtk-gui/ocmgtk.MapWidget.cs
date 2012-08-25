@@ -17,8 +17,6 @@ namespace ocmgtk {
         
         private Gtk.ScrolledWindow mapScroll;
         
-        private Gtk.ProgressBar mapProgress;
-        
         protected virtual void Build() {
             Stetic.Gui.Initialize(this);
             // Widget ocmgtk.MapWidget
@@ -36,20 +34,10 @@ namespace ocmgtk {
             this.mapVBox.Add(this.mapScroll);
             Gtk.Box.BoxChild w1 = ((Gtk.Box.BoxChild)(this.mapVBox[this.mapScroll]));
             w1.Position = 0;
-            // Container child mapVBox.Gtk.Box+BoxChild
-            this.mapProgress = new Gtk.ProgressBar();
-            this.mapProgress.HeightRequest = 10;
-            this.mapProgress.Name = "mapProgress";
-            this.mapVBox.Add(this.mapProgress);
-            Gtk.Box.BoxChild w2 = ((Gtk.Box.BoxChild)(this.mapVBox[this.mapProgress]));
-            w2.Position = 1;
-            w2.Expand = false;
-            w2.Fill = false;
             this.Add(this.mapVBox);
             if ((this.Child != null)) {
                 this.Child.ShowAll();
             }
-            this.mapProgress.Hide();
             this.Hide();
         }
     }

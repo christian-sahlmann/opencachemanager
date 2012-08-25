@@ -17785,19 +17785,6 @@ Cache Name</property>
             <property name="AutoSize">True</property>
           </packing>
         </child>
-        <child>
-          <widget class="Gtk.ProgressBar" id="mapProgress">
-            <property name="MemberName" />
-            <property name="HeightRequest">10</property>
-            <property name="Visible">False</property>
-          </widget>
-          <packing>
-            <property name="Position">1</property>
-            <property name="AutoSize">False</property>
-            <property name="Expand">False</property>
-            <property name="Fill">False</property>
-          </packing>
-        </child>
       </widget>
     </child>
   </widget>

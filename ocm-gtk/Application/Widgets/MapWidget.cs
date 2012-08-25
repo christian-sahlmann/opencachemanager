@@ -29,7 +29,6 @@ namespace ocmgtk
 	[System.ComponentModel.ToolboxItem(true)]
 	public partial class MapWidget : Gtk.Bin
 	{
-		WebView m_View;
 		List<string> m_PendingActions;
 		Dictionary<string, Geocache> m_UnfilteredCaches;
 		List<Waypoint> m_ChildWaypoints;
@@ -95,25 +94,9 @@ namespace ocmgtk
 		{
 			this.Build ();
 			m_Loaded = false;
-			m_View = new WebView();
-			m_View.WidthRequest = 100;
-			m_View.HeightRequest = 100;
 			m_UnfilteredCaches = new Dictionary<string, Geocache>();
 			m_ChildWaypoints = new List<Waypoint>();
-			mapScroll.AddWithViewport(m_View);
 			m_PendingActions = new List<string>();
-			m_View.LoadCommitted += HandleM_ViewLoadCommitted;
-			m_View.LoadStarted += HandleViewLoadStarted;
-			m_View.LoadFinished += HandleViewLoadFinished;
-			m_View.LoadProgressChanged += HandleViewLoadProgressChanged;
-			m_View.NavigationRequested += HandleM_ViewNavigationRequested;;
-		}
-
-		void HandleM_ViewLoadCommitted (object o, LoadCommittedArgs args)
-		{
-			mapProgress.Fraction = 0.10;
-			mapProgress.Visible = true;
-			OCMApp.UpdateGUIThread();
 		}
 
 		void HandleM_ViewNavigationRequested (object o, NavigationRequestedArgs args)
@@ -161,16 +144,9 @@ namespace ocmgtk
 
 		}
 
-		void HandleViewLoadProgressChanged (object o, LoadProgressChangedArgs args)
-		{
-			mapProgress.Fraction = ((double) args.Progress/ 100d);
-			OCMApp.UpdateGUIThread();
-		}
-
 		void HandleViewLoadFinished (object o, LoadFinishedArgs args)
 		{
 			m_Loaded = true;
-			mapProgress.Visible = false;
 			foreach(string script in m_PendingActions)
 			{
 				LoadScript(script);
@@ -178,19 +154,9 @@ namespace ocmgtk
 			m_PendingActions.Clear();
 		}
 
-		void HandleViewLoadStarted (object o, LoadStartedArgs args)
-		{
-			mapProgress.Fraction = 0.15;
-			mapProgress.Visible = true;
-			OCMApp.UpdateGUIThread();
-		}
-		
 		public void Reload()
 		{
 			m_Loaded = false;
-			m_View.LoadUri("file://" + System.Environment.CurrentDirectory + "/web/wpt_viewer.html?lat=" 
-			               + m_App.AppConfig.LastLat.ToString (CultureInfo.InvariantCulture) 
-			               + "&lon=" + m_App.AppConfig.LastLon.ToString (CultureInfo.InvariantCulture));
 			AddMaps(AppConfig.OpenLayerMaps);
 			LoadScript("setAutoSelectCache('" + AppConfig.AutoSelectCacheFromMap + "');");
 		}
@@ -386,8 +352,6 @@ namespace ocmgtk
 		{
 			if (!m_Loaded)
 				m_PendingActions.Add(script);
-			else
-				m_View.ExecuteScript(script);
 		}
 		
 		private void AddMaps(List<MapDescription> maps) 
