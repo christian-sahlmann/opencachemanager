@@ -17761,12 +17761,6 @@ Cache Name</property>
   <widget class="Gtk.Bin" id="ocmgtk.MapWidget" design-size="330 323">
     <property name="MemberName" />
     <property name="Visible">False</property>
-    <child>
-      <widget class="Gtk.VBox" id="mapVBox">
-        <property name="MemberName" />
-        <property name="Spacing">6</property>
-      </widget>
-    </child>
   </widget>
   <widget class="Gtk.Bin" id="ocmgtk.GeocacheInfoPanel" design-size="826 424">
     <property name="MemberName" />

@@ -13,18 +13,11 @@ namespace ocmgtk {
     
     public partial class MapWidget {
         
-        private Gtk.VBox mapVBox;
-        
         protected virtual void Build() {
             Stetic.Gui.Initialize(this);
             // Widget ocmgtk.MapWidget
             Stetic.BinContainer.Attach(this);
             this.Name = "ocmgtk.MapWidget";
-            // Container child ocmgtk.MapWidget.Gtk.Container+ContainerChild
-            this.mapVBox = new Gtk.VBox();
-            this.mapVBox.Name = "mapVBox";
-            this.mapVBox.Spacing = 6;
-            this.Add(this.mapVBox);
             if ((this.Child != null)) {
                 this.Child.ShowAll();
             }
