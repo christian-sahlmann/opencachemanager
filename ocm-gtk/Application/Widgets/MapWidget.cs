@@ -29,12 +29,10 @@ namespace ocmgtk
 	[System.ComponentModel.ToolboxItem(true)]
 	public partial class MapWidget : Gtk.Socket
 	{
-		List<string> m_PendingActions;
 		Dictionary<string, Geocache> m_UnfilteredCaches;
 		List<Waypoint> m_ChildWaypoints;
 		OCMApp m_App;
 		OCMMainWindow m_Win;
-		bool m_Loaded;
 		bool m_ShowNearby = false;
 		bool m_ShowAllChildren = false;
 		double m_Lat;
@@ -93,10 +91,8 @@ namespace ocmgtk
 		public MapWidget ()
 		{
 			this.Build ();
-			m_Loaded = false;
 			m_UnfilteredCaches = new Dictionary<string, Geocache>();
 			m_ChildWaypoints = new List<Waypoint>();
-			m_PendingActions = new List<string>();
 		}
 
 		void HandleM_ViewNavigationRequested (object o, NavigationRequestedArgs args)
@@ -144,19 +140,8 @@ namespace ocmgtk
 
 		}
 
-		void HandleViewLoadFinished (object o, LoadFinishedArgs args)
-		{
-			m_Loaded = true;
-			foreach(string script in m_PendingActions)
-			{
-				LoadScript(script);
-			}
-			m_PendingActions.Clear();
-		}
-
 		public void Reload()
 		{
-			m_Loaded = false;
 			AddMaps(AppConfig.OpenLayerMaps);
 			LoadScript("setAutoSelectCache('" + AppConfig.AutoSelectCacheFromMap + "');");
 		}
@@ -350,8 +335,6 @@ namespace ocmgtk
 		
 		private void LoadScript(string script)
 		{
-			if (!m_Loaded)
-				m_PendingActions.Add(script);
 		}
 		
 		private void AddMaps(List<MapDescription> maps) 
