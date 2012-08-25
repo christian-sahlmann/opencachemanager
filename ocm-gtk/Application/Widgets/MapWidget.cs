@@ -142,7 +142,7 @@ namespace ocmgtk
 
 		public void Reload()
 		{
-			Process.Start("gedit", Id.ToString());
+			Process.Start("../../../ocm-marble/ocm-marble", Id.ToString());
 		}
 		
 		public void ClearCaches()
