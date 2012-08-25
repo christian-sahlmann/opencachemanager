@@ -15,6 +15,7 @@
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.Text;
 using ocmengine;
@@ -141,8 +142,7 @@ namespace ocmgtk
 
 		public void Reload()
 		{
-			AddMaps(AppConfig.OpenLayerMaps);
-			LoadScript("setAutoSelectCache('" + AppConfig.AutoSelectCacheFromMap + "');");
+			Process.Start("gedit", Id.ToString());
 		}
 		
 		public void ClearCaches()
@@ -336,15 +336,6 @@ namespace ocmgtk
 		{
 		}
 		
-		private void AddMaps(List<MapDescription> maps) 
-		{
-			foreach (MapDescription map in maps)
-			{
-				if (map.Active) 
-					AddMap(map.Code);
-			}
-		}
-			
 		private void AddMap(string codeForMap) {
 			LoadScript("addMapRenderer(" + codeForMap + "); ");
 		}
