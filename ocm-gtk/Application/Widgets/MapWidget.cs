@@ -27,7 +27,7 @@ namespace ocmgtk
 
 
 	[System.ComponentModel.ToolboxItem(true)]
-	public partial class MapWidget : Gtk.Bin
+	public partial class MapWidget : Gtk.Socket
 	{
 		List<string> m_PendingActions;
 		Dictionary<string, Geocache> m_UnfilteredCaches;

@@ -16,11 +16,7 @@ namespace ocmgtk {
         protected virtual void Build() {
             Stetic.Gui.Initialize(this);
             // Widget ocmgtk.MapWidget
-            Stetic.BinContainer.Attach(this);
             this.Name = "ocmgtk.MapWidget";
-            if ((this.Child != null)) {
-                this.Child.ShowAll();
-            }
             this.Hide();
         }
     }
