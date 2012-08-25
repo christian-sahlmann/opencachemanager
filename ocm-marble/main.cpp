@@ -1,15 +1,21 @@
-#include <QApplication>
+#include <QtGui>
 #include <QX11EmbedWidget>
 #include <marble/MarbleWidget.h>
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    QX11EmbedWidget w;
-    Marble::MarbleWidget m(&w);
-    if (a.arguments().count() > 1)
-        w.embedInto(a.arguments()[1].toULong());
-    w.show();
+    QApplication app(argc, argv);
+
+    QX11EmbedWidget *widget = new QX11EmbedWidget;
+    Marble::MarbleWidget *marble = new Marble::MarbleWidget;
+
+    QHBoxLayout *layout = new QHBoxLayout;
+    layout->addWidget(marble);
+    widget->setLayout(layout);
+
+    if (app.arguments().count() > 1)
+        widget->embedInto(app.arguments()[1].toULong());
+    widget->show();
     
-    return a.exec();
+    return app.exec();
 }
