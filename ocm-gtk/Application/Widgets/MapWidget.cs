@@ -31,11 +31,13 @@ namespace ocmgtk
 	[System.ComponentModel.ToolboxItem(true)]
 	public partial class MapWidget : Gtk.Socket
 	{
-		StreamWriter m_stdin;
+		StreamWriter m_Stdin;
+		List<string> m_PendingActions;
 		Dictionary<string, Geocache> m_UnfilteredCaches;
 		List<Waypoint> m_ChildWaypoints;
 		OCMApp m_App;
 		OCMMainWindow m_Win;
+		bool m_Loaded;
 		bool m_ShowNearby = false;
 		bool m_ShowAllChildren = false;
 		double m_Lat;
@@ -93,8 +95,10 @@ namespace ocmgtk
 		
 		public MapWidget ()
 		{
+			m_Loaded = false;
 			m_UnfilteredCaches = new Dictionary<string, Geocache>();
 			m_ChildWaypoints = new List<Waypoint>();
+			m_PendingActions = new List<string>();
 		}
 
 		void HandleM_ViewNavigationRequested (object o, NavigationRequestedArgs args)
@@ -144,7 +148,16 @@ namespace ocmgtk
 
 		public void Reload()
 		{
-			m_stdin = Process.Start("../../../ocm-marble/ocm-marble", Id.ToString()).StandardInput;
+			ProcessStartInfo startInfo = new ProcessStartInfo("../../../ocm-marble/ocm-marble", Id.ToString());
+			startInfo.UseShellExecute = false;
+			startInfo.RedirectStandardInput = true;
+			m_Stdin = Process.Start(startInfo).StandardInput;
+			m_Loaded = true;
+			foreach(string script in m_PendingActions)
+			{
+				LoadScript(script);
+			}
+			m_PendingActions.Clear();
 			ZoomTo(m_App.AppConfig.LastLat, m_App.AppConfig.LastLon);
 		}
 		
@@ -337,7 +350,10 @@ namespace ocmgtk
 		
 		private void LoadScript(string script)
 		{
-			m_stdin.WriteLine(script);
+			if (!m_Loaded)
+				m_PendingActions.Add(script);
+			else
+				m_Stdin.WriteLine(script);
 		}
 		
 		private void AddMap(string codeForMap) {
