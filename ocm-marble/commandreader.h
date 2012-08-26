@@ -1,18 +1,14 @@
 #ifndef COMMANDREADER_H
 #define COMMANDREADER_H
 
-#include <QObject>
+#include <QThread>
 #include <marble/MarbleWidget.h>
 
-class CommandReader : public QObject
+class CommandReader : public QThread
 {
-    Q_OBJECT
 public:
     CommandReader(Marble::MarbleWidget *marble);
-
-public slots:
-    void readCommand();
-
+    void run();
 private:
     Marble::MarbleWidget *m_marble;
 };

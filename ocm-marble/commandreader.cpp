@@ -1,15 +1,20 @@
 #include "commandreader.h"
 #include <QtCore>
 
-CommandReader::CommandReader(Marble::MarbleWidget *marble)
+CommandReader::CommandReader(Marble::MarbleWidget *marble) :
+    QThread()
 {
     m_marble = marble;
 }
 
-void CommandReader::readCommand()
+void CommandReader::run()
 {
     QString line;
     QTextStream stream(stdin);
-    line = stream.readLine();
-    qDebug() << line;
+    forever {
+        qDebug() << "do";
+        line = stream.readLine();
+        qDebug() << line;
+        qDebug() << "/do";
+     }
 }

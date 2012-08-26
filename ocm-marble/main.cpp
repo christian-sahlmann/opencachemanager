@@ -1,4 +1,3 @@
-#include <unistd.h>
 #include <QtGui>
 #include <QX11EmbedWidget>
 #include <marble/MarbleWidget.h>
@@ -21,9 +20,8 @@ int main(int argc, char *argv[])
         widget->embedInto(app.arguments()[1].toULong());
     widget->show();
 
-    QSocketNotifier notifier(STDIN_FILENO, QSocketNotifier::Read);
     CommandReader commandReader(marble);
-    commandReader.connect(&notifier, SIGNAL(activated(int)), SLOT(readCommand()));
+    commandReader.start();
 
     return app.exec();
 }
