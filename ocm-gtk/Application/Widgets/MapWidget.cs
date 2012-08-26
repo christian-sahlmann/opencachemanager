@@ -17,6 +17,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
+using System.IO;
 using System.Text;
 using ocmengine;
 using Mono.Unix;
@@ -30,6 +31,7 @@ namespace ocmgtk
 	[System.ComponentModel.ToolboxItem(true)]
 	public partial class MapWidget : Gtk.Socket
 	{
+		StreamWriter m_stdin;
 		Dictionary<string, Geocache> m_UnfilteredCaches;
 		List<Waypoint> m_ChildWaypoints;
 		OCMApp m_App;
@@ -142,7 +144,8 @@ namespace ocmgtk
 
 		public void Reload()
 		{
-			Process.Start("../../../ocm-marble/ocm-marble", Id.ToString());
+			m_stdin = Process.Start("../../../ocm-marble/ocm-marble", Id.ToString()).StandardInput;
+			ZoomTo(m_App.AppConfig.LastLat, m_App.AppConfig.LastLon);
 		}
 		
 		public void ClearCaches()
@@ -334,6 +337,7 @@ namespace ocmgtk
 		
 		private void LoadScript(string script)
 		{
+			m_stdin.WriteLine(script);
 		}
 		
 		private void AddMap(string codeForMap) {
