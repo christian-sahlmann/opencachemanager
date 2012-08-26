@@ -8,6 +8,7 @@ int main(int argc, char *argv[])
     QApplication app(argc, argv);
 
     QX11EmbedWidget *widget = new QX11EmbedWidget;
+    app.connect(widget, SIGNAL(containerClosed()), SLOT(quit()));
     Marble::MarbleWidget *marble = new Marble::MarbleWidget;
     marble->setProjection(Marble::Mercator);
     marble->setMapThemeId("earth/openstreetmap/openstreetmap.dgml");
