@@ -12,6 +12,7 @@ int main(int argc, char *argv[])
     Marble::MarbleWidget *marble = new Marble::MarbleWidget;
     marble->setProjection(Marble::Mercator);
     marble->setMapThemeId("earth/openstreetmap/openstreetmap.dgml");
+    marble->zoomView(2911);
 
     QHBoxLayout *layout = new QHBoxLayout;
     layout->addWidget(marble);
