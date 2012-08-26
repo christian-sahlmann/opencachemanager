@@ -8,6 +8,8 @@ int main(int argc, char *argv[])
 
     QX11EmbedWidget *widget = new QX11EmbedWidget;
     Marble::MarbleWidget *marble = new Marble::MarbleWidget;
+    marble->setProjection(Marble::Mercator);
+    marble->setMapThemeId("earth/openstreetmap/openstreetmap.dgml");
 
     QHBoxLayout *layout = new QHBoxLayout;
     layout->addWidget(marble);
