@@ -16,7 +16,7 @@ void CommandReader::run()
         QStringList list = line.split(QRegExp("[\\(\\),]"));
         if (!line.isEmpty())
             qDebug() << list;
-        if (list[0] == "zoomTo")
+        if (list[0] == "zoomTo" || list[0] == "panTo")
             emit zoomTo(list[2].toDouble(), list[1].toDouble());
      }
 }
